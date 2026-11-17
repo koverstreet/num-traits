@@ -241,6 +241,10 @@ macro_rules! float_trait_impl {
                 use self::ParseFloatError as PFE;
 
                 // Special case radix 10 to use more accurate standard library implementation
+                //
+                // bcachefs: not where core has no float parsing - the kernel's,
+                // built with no_fp_fmt_parse; radix 10 takes the general path.
+                #[cfg(not(no_fp_fmt_parse))]
                 if radix == 10 {
                     return src.parse().map_err(|_| PFE {
                         kind: if src.is_empty() { Empty } else { Invalid },
