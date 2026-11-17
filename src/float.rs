@@ -2461,7 +2461,6 @@ mod tests {
     fn total_cmp() {
         use crate::float::TotalOrder;
         use core::cmp::Ordering;
-        use core::{f32, f64};
 
         fn check_eq<T: TotalOrder>(x: T, y: T) {
             assert_eq!(x.total_cmp(&y), Ordering::Equal);
